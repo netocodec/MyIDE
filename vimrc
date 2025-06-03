@@ -68,7 +68,6 @@ call plug#begin()
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'easymotion/vim-easymotion'
   Plug 'othree/yajs.vim'
-  Plug 'calviken/vim-gdscript3'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-python/python-syntax'
   Plug 'rust-lang/rust.vim'
