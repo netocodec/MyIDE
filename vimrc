@@ -37,7 +37,7 @@ function MyDiff()
 endfunction
 
 set fillchars+=vert:\|
-colorscheme molokai
+colorscheme nightfox
 syntax on
 set background=dark
 set ruler
@@ -60,6 +60,7 @@ set statusline="Welcome Netocodec, Ready To Code?!"
 " == Plug VIM
 
 call plug#begin()
+  Plug 'EdenEast/nightfox.nvim'
   Plug 'preservim/nerdtree'
   Plug 'mattn/emmet-vim'
   Plug 'itchyny/lightline.vim'
