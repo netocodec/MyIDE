@@ -56,3 +56,5 @@
 (package! prettier-js)
 (package! sql-indent)
 (package! ascii-art-to-unicode)
+(package! org-fancy-priorities)
+(package! org-bullets)

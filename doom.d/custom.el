@@ -5,8 +5,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(@ all-the-icons all-the-icons-nerd-fonts project-treemacs treemacs
-     treemacs-all-the-icons treemacs-evil)))
+   '(@ all-the-icons all-the-icons-nerd-fonts org-bullets org-fancy-priorities
+     project-treemacs treemacs treemacs-all-the-icons treemacs-evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

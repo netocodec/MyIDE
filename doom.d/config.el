@@ -87,3 +87,61 @@
   (add-hook 'before-save-hook #'refmt-before-save nil t))
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+;; Task and time tracking
+
+(use-package! org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("HiGH" "MEDIUM" "LOW")))
+
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(after! org
+	(setq org-hide-leading-stars t)
+	(add-hook 'org-mode-hook 'org-indent-mode)
+	(setq org-agenda-skip-scheduled-if-done t
+			org-priority-faces '((?A :foreground "#ff3e30")
+								(?B :foreground "#ffaa00")
+								(?C :foreground "#f1ff30"))
+			org-bullets-bullet-list '("◄" "◉" "○" "◆" "◇")
+			org-directory "~/Documents/MyOrg/"
+			org-agenda-files "~/Documents/MyOrg/my_agenda.org")
+
+	(setq org-capture-templates
+      '(("t" "Tasks" entry (file+headline "~/Documents/MyOrg/my_tasks.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+
+		 ("n" "Global Notes" entry (file+olp+datetree "~/Documents/MyOrg/my_notes.org" "Notes")
+            "* %?\nEntered on %U\n  %i\n  %a")
+
+        ("j" "Journal" entry (file+olp+datetree "~/Documents/MyOrg/my_journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")
+		 ))
+
+	(setq org-todo-keywords
+      '((sequence "TODO(t)" "PROJ(p)" "INPROGRESS(i)" "FEATURE(f)" "ONHOLD(o)" "BUG(b)" "|" "DONE(d)" "CANCELED(c)" "FIXED(x)")))
+
+	(setq org-todo-keyword-faces
+      '(("TODO"      :inherit (org-todo region) :foreground "#A3BE8C" :weight bold)
+		("PROJ"      :inherit (org-todo region) :foreground "#00ff73" :weight bold)
+		("FEATURE"      :inherit (org-todo region) :foreground "#88C0D0" :weight bold)
+        ("BUG"      :inherit (org-todo region) :foreground "#e3a01b" :weight bold)
+		("CHECK"     :inherit (org-todo region) :foreground "#ffffff" :weight bold)
+		("DONE"     :inherit (org-todo region) :foreground "#35c932" :weight bold)
+		("FIXED"     :inherit (org-todo region) :foreground "#58b056" :weight bold)
+		("CANCELED"     :inherit (org-todo region) :foreground "#de3cd3" :weight bold)
+		("IDEA"      :inherit (org-todo region) :foreground "#f7c052" :weight bold)
+		("ONHOLD"      :inherit (org-todo region) :foreground "#d9d145" :weight bold)
+		("INPROGRESS"      :inherit (org-todo region) :foreground "#5be3c5" :weight bold)))
+)
+
+(setq org-roam-directory "~/Documents/MyOrg")
+(setq deft-directory "~/Documents/MyOrg"
+		deft-extensions '("org" "txt")
+		deft-recursive t)
+
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
