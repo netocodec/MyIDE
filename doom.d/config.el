@@ -145,3 +145,63 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
+
+;; Custom messages and menu
+
+(remove-hook! '+doom-dashboard-functions
+  #'doom-dashboard-widget-shortmenu
+  #'doom-dashboard-widget-footer)
+
+
+(defun my-weebery-is-always-greater ()
+  (let* ((banner '("			"
+"                    (`.         ,-,"
+"                    ` `.    ,;' /"
+"                     `.  ,'/ .'"
+"                      `. X /.'	"
+"            .-;--''--.._` ` (	"
+"          .'            /   `	"
+"         ,           ` '   Q '	"
+"         ,         ,   `._    \ "
+"      ,.|         '     `-.;_'	"
+"      :  . `  ;    `  ` --,.._;"
+"       ' `    ,   )   .'	"
+"          `._ ,  '   /_	"
+"             ; ,''-,;' ``-	"
+"              ``-..__``--`	"))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat line (make-string (max 0 (- longest-line (length line))) 32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+
+(setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater
+      fancy-splash-image (file-name-concat doom-private-dir "images/logo.svg"))
+
+(defcustom my/dashboard-footer-messages
+  '("What is real? How do you define 'real'?"
+    "I'm trying to free your mind, Neo. But I can only show you the door. You're the one that has to walk through it."
+    "There is no spoon."
+    "Remember... all I'm offering is the truth. Nothing more."
+    "What if I told you... everything you know is a lie?"
+    "Dodge this."
+    "Free your mind."
+    "The matrix cannot tell you who you are."
+	"The Matrix is a system, Neo. That system is our enemy..."
+	"Choice is an illusion created between those with power and those without.")
+  "A list of messages, one of which dashboard chooses to display.")
+
+(add-hook! '+doom-dashboard-functions :append
+  (let* ((msg  (nth (random (length my/dashboard-footer-messages))
+                    my/dashboard-footer-messages))
+         (line msg))
+    (insert "\n" (+doom-dashboard--center +doom-dashboard--width line) "\n"))
+
+      (setq mode-line-format nil))
+
+(setq-hook! '+doom-dashboard-mode-hook
+   evil-normal-state-cursor (list nil))
