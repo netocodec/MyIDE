@@ -110,32 +110,35 @@
 			org-agenda-files "~/Documents/MyOrg/my_agenda.org")
 
 	(setq org-capture-templates
-      '(("t" "Tasks" entry (file+headline "~/Documents/MyOrg/my_tasks.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+      '(("t" "Tasks" entry (file+headline "F:\\MyOrgAgenda\\my_tasks.org" "Tasks")
+         "* Tasks\n ** PROJ WriteHere\n *** TODO %?\n  %i\n  %a")
 
-		 ("n" "Global Notes" entry (file+olp+datetree "~/Documents/MyOrg/my_notes.org" "Notes")
+		 ("m" "Meetings" entry (file+headline "F:\\MyOrgAgenda\\my_meetings.org" "Meetings")
+         "* MEETINGS\n\n ** MEETING Write Here The Metting Context\n %?\n  %i\n  %a")
+
+		 ("n" "Global Notes" entry (file+olp+datetree "F:\\MyOrgAgenda\\my_notes.org" "Notes")
             "* %?\nEntered on %U\n  %i\n  %a")
 
-        ("j" "Journal" entry (file+olp+datetree "~/Documents/MyOrg/my_journal.org")
+        ("j" "Journal" entry (file+olp+datetree "F:\\MyOrgAgenda\\my_journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
 		 ))
 
 	(setq org-todo-keywords
-      '((sequence "TODO(t)" "PROJ(p)" "INPROGRESS(i)" "FEATURE(f)" "ONHOLD(o)" "BUG(b)" "|" "DONE(d)" "CANCELED(c)" "FIXED(x)")))
+      '((sequence "TODO(t)" "MEETING(m)" "PROJ(p)" "INPROGRESS(i)" "FEATURE(f)" "ONHOLD(o)" "BUG(b)" "|" "DONE(d)" "CANCELED(c)" "FIXED(x)")))
 
 	(setq org-todo-keyword-faces
       '(("TODO"      :inherit (org-todo region) :foreground "#A3BE8C" :weight bold)
+		("MEETING"      :inherit (org-todo region) :foreground "#fbff00" :weight bold)
 		("PROJ"      :inherit (org-todo region) :foreground "#00ff73" :weight bold)
 		("FEATURE"      :inherit (org-todo region) :foreground "#88C0D0" :weight bold)
-        ("BUG"      :inherit (org-todo region) :foreground "#e3a01b" :weight bold)
+                ("BUG"      :inherit (org-todo region) :foreground "#e3a01b" :weight bold)
 		("CHECK"     :inherit (org-todo region) :foreground "#ffffff" :weight bold)
 		("DONE"     :inherit (org-todo region) :foreground "#35c932" :weight bold)
 		("FIXED"     :inherit (org-todo region) :foreground "#58b056" :weight bold)
 		("CANCELED"     :inherit (org-todo region) :foreground "#de3cd3" :weight bold)
 		("IDEA"      :inherit (org-todo region) :foreground "#f7c052" :weight bold)
 		("ONHOLD"      :inherit (org-todo region) :foreground "#d9d145" :weight bold)
-		("INPROGRESS"      :inherit (org-todo region) :foreground "#5be3c5" :weight bold)))
-)
+		("INPROGRESS"      :inherit (org-todo region) :foreground "#5be3c5" :weight bold))))
 
 (setq org-roam-directory "~/Documents/MyOrg")
 (setq deft-directory "~/Documents/MyOrg"
