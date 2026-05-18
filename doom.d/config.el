@@ -110,16 +110,16 @@
 			org-agenda-files "~/Documents/MyOrg/my_agenda.org")
 
 	(setq org-capture-templates
-      '(("t" "Tasks" entry (file+headline "F:\\MyOrgAgenda\\my_tasks.org" "Tasks")
+      '(("t" "Tasks" entry (file+headline "~/Documents/MyOrg/my_tasks.org" "Tasks")
          "* Tasks\n ** PROJ WriteHere\n *** TODO %?\n  %i\n  %a")
 
-		 ("m" "Meetings" entry (file+headline "F:\\MyOrgAgenda\\my_meetings.org" "Meetings")
+		 ("m" "Meetings" entry (file+headline "~/Documents/MyOrg/my_meetings.org" "Meetings")
          "* MEETINGS\n\n ** MEETING Write Here The Metting Context\n %?\n  %i\n  %a")
 
-		 ("n" "Global Notes" entry (file+olp+datetree "F:\\MyOrgAgenda\\my_notes.org" "Notes")
+		 ("n" "Global Notes" entry (file+olp+datetree "~/Documents/MyOrg/my_notes.org" "Notes")
             "* %?\nEntered on %U\n  %i\n  %a")
 
-        ("j" "Journal" entry (file+olp+datetree "F:\\MyOrgAgenda\\my_journal.org")
+        ("j" "Journal" entry (file+olp+datetree "~/Documents/MyOrg/my_journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")
 		 ))
 
@@ -154,8 +154,8 @@
 (remove-hook! '+doom-dashboard-functions
   #'doom-dashboard-widget-shortmenu
   #'doom-dashboard-widget-footer)
-
-
+  
+  
 (defun my-weebery-is-always-greater ()
   (let* ((banner '("			"
 "                    (`.         ,-,"
@@ -181,10 +181,10 @@
                 (concat line (make-string (max 0 (- longest-line (length line))) 32)))
                "\n"))
      'face 'doom-dashboard-banner)))
-
+	 
 (setq +doom-dashboard-ascii-banner-fn #'my-weebery-is-always-greater
       fancy-splash-image (file-name-concat doom-private-dir "images/logo.svg"))
-
+	 
 (defcustom my/dashboard-footer-messages
   '("What is real? How do you define 'real'?"
     "I'm trying to free your mind, Neo. But I can only show you the door. You're the one that has to walk through it."
@@ -208,3 +208,13 @@
 
 (setq-hook! '+doom-dashboard-mode-hook
    evil-normal-state-cursor (list nil))
+   
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
+  
+;; Restclient package for Org Mode!
+(require 'restclient)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((restclient . t)))
