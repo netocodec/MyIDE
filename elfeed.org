@@ -1,0 +1,128 @@
+* MyFeeds :elfeed:
+** Software Development :dev:
+*** Core Engineering & Architecture :architecture:
+**** [[https://martinfowler.com/feed.atom][Martin Fowler]]
+**** [[https://newsletter.pragmaticengineer.com/feed][The Pragmatic Engineer]]
+**** [[https://feeds.feedburner.com/highscalability][High Scalability]]
+**** [[https://feed.infoq.com/][InfoQ]]
+**** [[https://queue.acm.org/rss/feeds/queuecontent.xml][ACM Queue]]
+**** [[https://www.joelonsoftware.com/feed/][Joel on Software]]
+
+*** Programming & Practical Coding :programming:
+**** [[https://stackoverflow.blog/feed/][Stack Overflow Blog]]
+**** [[https://dev.to/feed][DEV Community]]
+**** [[https://www.freecodecamp.org/news/rss/][freeCodeCamp News]]
+**** [[https://css-tricks.com/feed/][CSS-Tricks]]
+**** [[https://davidwalsh.name/feed][David Walsh Blog]]
+**** [[https://www.smashingmagazine.com/feed/][Smashing Magazine]]
+
+*** AI / ML / LLM Engineering :AI:
+**** [[https://openai.com/news/rss.xml][OpenAI News]]
+**** [[https://simonwillison.net/atom/everything/][Simon Willison]]
+**** [[https://huggingface.co/blog/feed.xml][Hugging Face Blog]]
+**** [[https://blog.google/technology/ai/rss/][Google AI Blog]]
+**** [[https://www.latent.space/feed][Latent Space]]
+
+*** DevOps / Cloud / Infrastructure :DEVOps:
+**** [[https://thenewstack.io/feed/][The New Stack]]
+**** [[https://netflixtechblog.com/feed][Netflix TechBlog]]
+**** [[https://blog.cloudflare.com/rss/][Cloudflare Blog]]
+**** [[https://aws.amazon.com/blogs/aws/feed/][AWS News Blog]]
+**** [[https://kubernetes.io/feed.xml][Kubernetes Blog]]
+**** [[https://www.hashicorp.com/blog/feed.xml][HashiCorp Blog]]
+
+*** JavaScript / TypeScript :JS:
+**** [[https://javascriptweekly.com/rss/][JavaScript Weekly]]
+**** [[https://nodeweekly.com/rss/][Node Weekly]]
+
+*** TypeScript :typescript:
+**** [[https://devblogs.microsoft.com/typescript/feed/][TypeScript Blog]]
+
+*** Python :python:
+**** [[https://feeds.feedburner.com/PythonInsider][Python Insider]]
+**** [[https://realpython.com/atom.xml][Real Python]]
+
+*** Rust :rust:
+**** [[https://blog.rust-lang.org/feed.xml][Rust Blog]]
+
+*** Go :go_lang:
+**** [[https://go.dev/blog/feed.atom][Go Blog]]
+
+*** Java :java:
+**** [[https://inside.java/feed.xml][Inside Java]]
+
+*** Indie Dev Signal :indie_dev:
+**** [[https://hnrss.org/frontpage][Hacker News Frontpage]]
+
+** Cybersecurity / Bug Bounty
+*** Cybersecurity News :cybersecurity:
+**** [[https://thehackernews.com/feeds/posts/default][The Hacker News]]
+**** [[https://www.bleepingcomputer.com/feed/][BleepingComputer]]
+**** [[https://www.darkreading.com/rss.xml][Dark Reading]]
+**** [[https://krebsonsecurity.com/feed/][Krebs on Security]]
+**** [[https://www.schneier.com/feed/atom/][Schneier on Security]]
+**** [[https://feeds.feedburner.com/securityweek][SecurityWeek]]
+**** [[https://www.csoonline.com/feed][CSO Online]]
+**** [[https://www.theregister.com/security/headlines.atom][The Register Security]]
+**** [[https://blog.talosintelligence.com/feeds/posts/default][Cisco Talos Intelligence]]
+**** [[https://securelist.com/feed/][Kaspersky Securelist]]
+**** [[https://unit42.paloaltonetworks.com/feed/][Palo Alto Unit 42]]
+**** [[https://www.recordedfuture.com/feed][Recorded Future / The Record]]
+
+*** Threat Intelligence & Vulnerabilities :vulns:
+**** [[https://cvealert.net/index.xml][CVE Alert]]
+**** [[https://www.cisa.gov/cybersecurity-advisories/all.xml][CISA Advisories]]
+**** [[https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss.xml][NVD CVE Feed]]
+**** [[https://www.exploit-db.com/rss.xml][Exploit Database]]
+**** [[https://www.opencve.io/cve.rss][OpenCVE]]
+**** [[https://dstif.io/rss.xml][Dragon Security Threat Intelligence Feed]]
+**** [[https://www.infoq.com/feed/security-vulnerabilities/][InfoQ Security Vulnerabilities]]
+
+*** Bug Bounty :bug_bounty:
+**** [[https://www.hackerone.com/blog/rss.xml][HackerOne Blog]]
+**** [[https://www.bugcrowd.com/blog/feed/][Bugcrowd Blog]]
+**** [[https://www.intigriti.com/researchers/blog/feed][Intigriti Blog]]
+**** [[https://www.yeswehack.com/learn-bug-bounty/feed][YesWeHack Blog]]
+**** [[https://portswigger.net/daily-swig/rss][PortSwigger Daily Swig]]
+**** [[https://infosecwriteups.com/feed][InfoSec Write-ups]]
+**** [[https://medium.com/feed/tag/bug-bounty][Medium Bug Bounty]]
+**** [[https://github.blog/tag/bug-bounty/feed/][GitHub Bug Bounty]]
+**** [[https://immunefi.com/blog/feed/][Immunefi Blog]]
+**** [[https://www.synack.com/blog/feed/][Synack Blog]]
+**** [[https://www.openbugbounty.org/rss.xml][Open Bug Bounty]]
+
+*** Offensive Security / Pentesting :pentesting:
+**** [[https://feeds.feedburner.com/PacketStormSecurity][Packet Storm Security]]
+**** [[https://www.hackthebox.com/blog/rss.xml][Hack The Box]]
+**** [[https://www.offsec.com/blog/feed/][OffSec Blog]]
+**** [[https://portswigger.net/research/rss][PortSwigger Research]]
+**** [[https://bishopfox.com/blog/rss.xml][Bishop Fox]]
+**** [[https://labs.detectify.com/feed/][Detectify Labs]]
+**** [[https://www.rapid7.com/blog/rss/][Rapid7 Blog]]
+**** [[https://www.sentinelone.com/labs/feed/][SentinelOne Labs]]
+
+*** Malware & Reverse Engineering :malware_dev:
+**** [[https://malwarebytes.com/blog/feed][Malwarebytes Labs]]
+**** [[https://blog.google/threat-analysis-group/rss/][Google TAG]]
+**** [[https://research.checkpoint.com/feed/][Check Point Research]]
+**** [[https://blog.malwarebytes.com/feed/][Malwarebytes]]
+**** [[https://www.zscaler.com/blogs/security-research/rss.xml][Zscaler ThreatLabz]]
+
+*** Communities & Hacker Culture :hacker_comm:
+**** [[https://hnrss.org/frontpage?q=security][Hacker News Security]]
+**** [[https://lobste.rs/rss][Lobsters]]
+**** [[https://www.reddit.com/r/netsec/.rss][Reddit /r/netsec]]
+**** [[https://www.reddit.com/r/bugbounty/.rss][Reddit /r/bugbounty]]
+**** [[https://www.reddit.com/r/cybersecurity/.rss][Reddit /r/cybersecurity]]
+**** [[https://www.reddit.com/r/netsecstudents/.rss][Reddit /r/netsecstudents]]
+
+*** AppSec & Secure Coding :AppSec:
+**** [[https://owasp.org/www-project-web-security-testing-guide/latest/atom.xml][OWASP WSTG]]
+**** [[https://cheatsheetseries.owasp.org/atom.xml][OWASP Cheat Sheets]]
+**** [[https://appsec.fyi/rss.xml][AppSec FYI]]
+**** [[https://security.googleblog.com/atom.xml][Google Security Blog]]
+
+*** Curated Security Aggregators :sec_others:
+**** [[https://stackfeed.org/rss][StackFeed]]
+**** [[https://www.quitehacker.com/rss.xml][QuiteHacker]]
+**** [[https://www.paranoidcybersecurity.com/rss/all][Paranoid Cybersecurity]]

@@ -60,3 +60,8 @@
 (package! org-bullets)
 (package! restclient)
 (package! ob-restclient)
+(package! dirvish)
+(package! elfeed)
+(package! elfeed-goodies)
+(package! elfeed-org)
+(package! emmet-mode)

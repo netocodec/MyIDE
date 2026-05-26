@@ -213,8 +213,103 @@
   :ensure t
   :bind ("C-c d" . docker))
   
+  
 ;; Restclient package for Org Mode!
 (require 'restclient)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((restclient . t)))
+ 
+ 
+;; Dirvish Configuration (Like MC)
+ 
+(use-package! dirvish
+  :init
+  (dirvish-override-dired-mode)
+
+  :config
+  ;; Nice defaults
+  (setq dirvish-attributes
+        '(vc-state subtree-state all-the-icons
+          file-time file-size collapse))
+
+  ;; Open dirs in same buffer
+  (setq dired-kill-when-opening-new-dired-buffer t)
+
+  ;; Copy/move between split panes like MC
+  (setq dired-dwim-target t)
+
+  ;; Reuse buffers
+  (setq dirvish-reuse-session t)
+  
+  ;; Use V-Split
+  (setq split-width-threshold 0)
+
+  ;; Quick access bookmarks
+  (setq dirvish-quick-access-entries
+        '(("d" "~/Downloads/"               "Downloads")
+          ("p" "~/Documents/MyWork/MyProjects"                "My Projects")
+	  ("h" "~/"               "Home")))
+
+  ;; Evil-style navigation
+  (map! :map dirvish-mode-map
+        :n "h" #'dired-up-directory
+        :n "l" #'dired-find-file
+        :n "TAB" #'dirvish-subtree-toggle
+        :n "q" #'quit-window))
+
+;; Open Dirvish with leader key
+(map! :leader
+      :desc "Dirvish"
+      "o d" #'dirvish)
+	  
+
+(after! dirvish
+  (map! :map dirvish-mode-map
+        :n "a" #'dirvish-quick-access)
+		;; Disable all previews
+		(setq dirvish-preview-dispatchers nil))
+
+
+;; Elfeed
+(use-package elfeed
+  :ensure t
+  :config
+  (setq elfeed-search-filter "@2-week-ago +unread")
+  (setf url-queue-timeout 20)
+  (setq elfeed-curl-max-connections 5)
+  :bind (:map elfeed-search-mode-map
+			  ("R" . elfeed-update)
+			  ("Q" . elfeed-kill-buffer)))
+			  
+(keymap-global-set "C-x w" #'elfeed)
+
+(require 'elfeed)
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+;; Load elfeed-org
+(require 'elfeed-org)
+
+;; Initialize elfeed-org
+;; This hooks up elfeed-org to read the configuration when elfeed
+;; is started with =M-x elfeed=
+(elfeed-org)
+
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+
+;; Configure Elfeed with org mode
+
+(use-package elfeed-org
+  :ensure t
+  :after elfeed
+  :config
+  (setq rmh-elfeed-org-files '("~/Documents/MyOrg/elfeed.org")))
+
+;; (with-eval-after-load 'elfeed (elfeed-org))
+
+
+;; Emmet HTML Tag Generator
+
+(require 'emmet-mode)
+
