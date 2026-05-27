@@ -308,8 +308,12 @@
 
 ;; (with-eval-after-load 'elfeed (elfeed-org))
 
+;; Emmet Mode Configuration
 
-;; Emmet HTML Tag Generator
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(setq emmet-move-cursor-between-quotes t) ;; default nil
 
-(require 'emmet-mode)
-
+(map! :leader
+      :desc "Emmet Expand"
+      "e" #'emmet-expand-line)
