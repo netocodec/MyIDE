@@ -57,7 +57,7 @@
 (package! sql-indent)
 (package! ascii-art-to-unicode)
 (package! org-fancy-priorities)
-(package! org-bullets)
+(package! org-modern)
 (package! restclient)
 (package! ob-restclient)
 (package! dirvish)
@@ -65,3 +65,4 @@
 (package! elfeed-goodies)
 (package! elfeed-org)
 (package! emmet-mode)
+(package! org-super-agenda)

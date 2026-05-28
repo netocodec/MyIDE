@@ -105,7 +105,6 @@
 			org-priority-faces '((?A :foreground "#ff3e30")
 								(?B :foreground "#ffaa00")
 								(?C :foreground "#f1ff30"))
-			org-bullets-bullet-list '("◄" "◉" "○" "◆" "◇")
 			org-directory "~/Documents/MyOrg/"
 			org-agenda-files "~/Documents/MyOrg/my_agenda.org")
 
@@ -124,7 +123,7 @@
 		 ))
 
 	(setq org-todo-keywords
-      '((sequence "TODO(t)" "MEETING(m)" "PROJ(p)" "INPROGRESS(i)" "FEATURE(f)" "ONHOLD(o)" "BUG(b)" "|" "DONE(d)" "CANCELED(c)" "FIXED(x)")))
+      '((sequence "TODO(t)" "MEETING(m)" "PROJ(p)" "IDEA(a)" "CHECK(h)" "INPROGRESS(i)" "FEATURE(f)" "ONHOLD(o)" "BUG(b)" "|" "DONE(d)" "CANCELED(c)" "FIXED(x)")))
 
 	(setq org-todo-keyword-faces
       '(("TODO"      :inherit (org-todo region) :foreground "#A3BE8C" :weight bold)
@@ -221,9 +220,9 @@
  '((restclient . t)))
  
  
-;; Dirvish Configuration (Like MC)
+ ;; Dirvish Configuration (Like MC)
  
-(use-package! dirvish
+ (use-package! dirvish
   :init
   (dirvish-override-dired-mode)
 
@@ -258,13 +257,39 @@
         :n "TAB" #'dirvish-subtree-toggle
         :n "q" #'quit-window))
 
+
+;; copy/move between panes automatically
+
+(after! dired
+  (setq dired-dwim-target t))
+  
+;; 2 pane Dirvish
+
+(defun dirvish-mc-pane ()
+  (interactive)
+  (delete-other-windows)
+  (let ((left (read-directory-name "Left: "))
+        (right (read-directory-name "Right: ")))
+    (dired left)
+    (split-window-right)
+    (other-window 1)
+    (dired right)))
+	
 ;; Open Dirvish with leader key
 (map! :leader
       :desc "Dirvish"
-      "o d" #'dirvish)
+      "o d" #'dirvish-mc-pane)
 	  
 
 (after! dirvish
+  ;; disable preview system completely
+  (setq dirvish-use-preview nil
+        dirvish-preview-dispatchers nil)
+		
+  (setq dirvish-attributes nil) ;; optional cleanup
+  
+  (setq split-width-threshold 0
+        split-height-threshold nil)
   (map! :map dirvish-mode-map
         :n "a" #'dirvish-quick-access)
 		;; Disable all previews
@@ -317,3 +342,221 @@
 (map! :leader
       :desc "Emmet Expand"
       "e" #'emmet-expand-line)
+	  
+	  
+;;; ------------------------------------------------------
+;;; ORG SUPER AGENDA
+;;; ------------------------------------------------------
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
+  (org-super-agenda-mode))
+
+(after! org-agenda
+  ;; Cleaner agenda
+  (setq org-agenda-start-with-log-mode nil
+        org-agenda-span 1
+        org-agenda-start-on-weekday nil
+        org-agenda-window-setup 'current-window
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-block-separator nil
+        org-agenda-compact-blocks t
+        org-agenda-start-day nil
+		org-agenda-sticky t
+		org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " %i %-12:c")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c")))
+	
+	;; Time grid
+	(setq org-agenda-use-time-grid t
+      org-agenda-show-all-dates t
+      org-agenda-time-grid
+      '((daily today require-timed)
+        (800 1000 1200 1400 1600 1800 2000)
+        " ┄┄┄┄┄ "
+        ""))
+		
+   ;; Vertical line to seperate the sections for better reading
+   (setq org-super-agenda-separator
+      (propertize
+       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+       'face
+       'shadow))
+	   
+  ;; Org itself adds another separator and it can look cluttered alongside
+  (setq org-agenda-block-separator nil)
+
+  ;; MAIN DASHBOARD
+  (setq org-agenda-custom-commands
+        '(("d" "Developer Dashboard"
+           (;; DAILY AGENDA
+            (agenda ""
+                    ((org-agenda-span 1)
+                     (org-super-agenda-groups
+
+                      '((:name "🔥 Today"
+                         :time-grid t
+                         :date today
+                         :scheduled today
+                         :order 1)
+
+                        (:name "⚠️ Overdue"
+                         :deadline past
+                         :order 3)
+
+                        (:name "📅 Due Soon"
+                         :deadline future
+                         :order 4)
+
+                        (:name "⏳ Upcoming"
+                         :deadline future
+						 :time-grid t
+                         :order 5)
+			 ))))
+			 
+			 ;; -------------------------------------------------
+			;; 🤝 MEETINGS (UPCOMING + PAST)
+			;; -------------------------------------------------
+
+			(alltodo ""
+				((org-agenda-overriding-header "\n\n🤝 MEETINGS QUEUE\n")
+
+				(org-super-agenda-groups
+					'((:name "🕐 Today Meetings"
+						:time-grid t
+						:and (:todo "MEETING"
+						:scheduled today)
+						:order 1)
+			   
+					  (:name "📅 Upcoming Meetings"
+						:and (:todo "MEETING"
+						:scheduled future)
+						:order 2)
+
+					  (:name "🗂 Last Meetings"
+						:and (:todo "MEETING"
+							:scheduled past)
+						:order 3)
+					(:discard (:anything t))))))
+
+            ;; TASK VIEW
+            (alltodo ""
+                     ((org-agenda-overriding-header "\n\n⚙️ WORK QUEUE\n")
+
+                      (org-super-agenda-groups
+
+                       '((:name "⚡ High Priority"
+							:priority<= "A"
+							:order 1)
+					   
+					   (:name "🔥 In Progress"
+                          :todo "INPROGRESS"
+                          :order 2)
+						  
+						(:name "🎯 Quick Picks"
+						  :effort< "0:15"
+						  :order 3)
+
+                         (:name "🐞 Bugs"
+                          :todo "BUG"
+                          :order 4)
+
+                         (:name "✨ Features"
+                          :todo "FEATURE"
+                          :order 5)
+
+                         (:name "📦 Projects"
+                          :todo "PROJ"
+                          :order 6)
+
+                         (:name "📋 General Tasks"
+                          :todo "TODO"
+                          :order 7)
+
+                         (:name "🧪 Needs Checking"
+                          :todo "CHECK"
+                          :order 8)
+
+                         (:name "⏸ On Hold"
+                          :todo "ONHOLD"
+                          :order 9)
+						  
+						(:name "💡 My Ideas"
+                            :todo "IDEA"
+                            :order 10)
+							
+						 (:name "✅ Habits"
+							:habit t
+							:time-grid t
+							:order 11)
+							
+                         (:discard
+                          (:todo "DONE"))
+						  
+						 (:discard
+                          (:todo "MEETING"))
+
+                         (:discard
+                          (:todo "CANCELED"))
+
+                         (:discard
+                          (:todo "FIXED"))))))
+						  
+						  )))))
+
+;;; ------------------------------------------------------
+;;; OPTIONAL NICE-TO-HAVES
+;;; ------------------------------------------------------
+
+;;; Looks very good with Doom themes
+(custom-set-faces!
+  '(org-priority
+    :foreground "#fa332f"
+    :weight bold))
+
+;; Better logging
+(setq org-log-done 'time)
+
+;; Save all org buffers automatically
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
+
+
+;;; ------------------------------------------------------
+;;; ORG MODERN
+;;; ------------------------------------------------------
+
+(use-package! org-modern
+  :hook
+  (org-mode . org-modern-mode)
+  (org-agenda-finalize . org-modern-agenda)
+
+  :config
+  ;; pretty tables
+  (setq org-modern-table nil)
+
+  ;; modern todo keywords
+  (setq org-modern-todo t)
+
+  ;; modern tags
+  (setq org-modern-tag t)
+
+  ;; modern priorities
+  (setq org-modern-priority t)
+
+  ;; star styling
+  (setq org-modern-star 'replace)
+
+  ;; folded ellipsis
+  (setq org-ellipsis " ▾")
+
+  ;; optional: nicer bullets
+  (setq org-modern-list
+        '((?- . "◄")
+          (?* . "○")
+          (?+ . "◇"))))
+		  
+
+		  
